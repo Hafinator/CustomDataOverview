@@ -28,24 +28,9 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="api\controllers\todoCtrl.js">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="api\models\todoModel.js">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="api\routes\todoRoute.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="app.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="api\" />
-    <Folder Include="api\controllers\" />
-    <Folder Include="api\models\" />
-    <Folder Include="api\routes\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
