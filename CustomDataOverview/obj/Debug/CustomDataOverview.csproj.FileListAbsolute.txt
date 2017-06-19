@@ -1,6 +1,0 @@
-C:\Programi\CustomDataOverview\CustomDataOverview\bin\CustomDataOverview.dll.config
-C:\Programi\CustomDataOverview\CustomDataOverview\bin\CustomDataOverview.dll
-C:\Programi\CustomDataOverview\CustomDataOverview\bin\CustomDataOverview.pdb
-C:\Programi\CustomDataOverview\CustomDataOverview\obj\Debug\CustomDataOverview.csprojResolveAssemblyReference.cache
-C:\Programi\CustomDataOverview\CustomDataOverview\obj\Debug\CustomDataOverview.dll
-C:\Programi\CustomDataOverview\CustomDataOverview\obj\Debug\CustomDataOverview.pdb

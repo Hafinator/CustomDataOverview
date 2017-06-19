@@ -57,18 +57,35 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gulpfile.js" />
+    <Content Include="wwwroot\3rd\scripts\angular.js" />
+    <Content Include="wwwroot\3rd\scripts\c3-angular.js" />
+    <Content Include="wwwroot\3rd\scripts\c3.js" />
+    <Content Include="wwwroot\3rd\scripts\d3.js" />
+    <Content Include="wwwroot\3rd\styles\c3.css" />
+    <Content Include="wwwroot\3rd\styles\w3.css" />
     <Content Include="Web.config" />
+    <Content Include="wwwroot\3rd\styles\font-awesome.css" />
+    <Content Include="wwwroot\app\appModul.js" />
+    <Content Include="wwwroot\app\IndexCtrl.js" />
+    <Content Include="wwwroot\index.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="bower.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="other_lib\" />
+    <Folder Include="wwwroot\tests\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

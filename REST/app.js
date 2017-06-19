@@ -1,9 +1,16 @@
-const Influx = require('influx')
-const express = require('express')
-const http = require('http')
-const os = require('os')
+'use strict';
+var Influx = require('influx'),
+	express = require('express'),
+	http = require('http'),
+	os = require('os'),
+	path = require("path"),
+	bodyParser = require('body-parser'),
+	app = express();
 
-const app = express()
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/', express.static(__dirname));
 
 const influx = new Influx.InfluxDB({
 	host: 'localhost',
@@ -12,11 +19,14 @@ const influx = new Influx.InfluxDB({
 		{
 			measurement: 'metering',
 			fields: {
-				path: Influx.FieldType.STRING,
-				duration: Influx.FieldType.INTEGER
+				VAL: Influx.FieldType.FLOAT,
+				STAT: Influx.FieldType.INTEGER
 			},
 			tags: [
-				'host'
+				'Device',
+				'Register',
+				'Storage',
+				'unit'				
 			]
 		}
 	]
@@ -44,26 +54,42 @@ app.use((req, res, next) => {
 		const duration = Date.now() - start
 		console.log(`Request to ${req.path} took ${duration}ms`);
 
-		influx.writePoints([
-			{
-				measurement: 'metering',
-				tags: { host: os.hostname() },
-				fields: { duration, path: req.path },
-			}
-		]).catch(err => {
-			console.error(`Error saving data to InfluxDB! ${err.stack}`)
-		})
 	})
 	return next()
 })
 
-//app.get('/', function (req, res) {
-//	setTimeout(() => res.end('Hello world!'), Math.random() * 500)
-//})
+app.get('/', function (req, res) {
+	res.sendFile(path.join(__dirname + '/index.html'));
+});
 
-app.get('/times', function (req, res) {
+app.get('/data/:from/:to/:reg/:dev/:lim', function (req, res) {
 	influx.query(`
     select * from metering
+	where time >= '${req.params.from}'
+	and time <= '${req.params.to}'
+	and Register = '${req.params.reg}'
+	and Device = '${req.params.dev}'
+	limit ${req.params.lim}
+  `).then(result => {
+			res.json(result)
+		}).catch(err => {
+			res.status(500).send(err.stack)
+		})
+})
+app.get('/data/:reg', function (req, res) {
+	influx.query(`
+    select * from metering
+	where Register = '${req.params.reg}'
+	limit 10
+  `).then(result => {
+			res.json(result)
+		}).catch(err => {
+			res.status(500).send(err.stack)
+		})
+})
+app.get('/series', function (req, res) {
+	influx.query(`
+show series
   `).then(result => {
 			res.json(result)
 		}).catch(err => {
